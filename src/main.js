@@ -3,7 +3,7 @@ let lastScrollTop = 0;
 const header = document.getElementById('site-header');
 const scrollThreshold = 50;
 
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', (e) => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
   // Add box shadow when scrolled
@@ -25,49 +25,56 @@ window.addEventListener('scroll', () => {
   lastScrollTop = scrollTop;
 });
 
-// Mobile menu toggle
-const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
+let testArray = [
+  {
+    type: "income",
+    sum: 500,
+    category: "food",
+    date: "01.10.26",
+    description: "Description"
+  },
+  {
+    type: "income",
+    sum: 500,
+    category: "food",
+    date: "01.10.26",
+    description: "Description"
+  },
+  {
+    type: "income",
+    sum: 500,
+    category: "food",
+    date: "01.10.26",
+    description: "Description"
+  },
+  {
+    type: "income",
+    sum: 500,
+    category: "food",
+    date: "01.10.26",
+    description: "Description"
+  }
+];
 
-mobileMenuToggle.addEventListener('click', () => {
-  mobileMenu.classList.toggle('show');
-  mobileMenuToggle.parentElement.classList.toggle('mobile-menu-open');
-});
+let table = document.createElement('table');
+table.classList = "table table-striped";
 
-// Add active class to nav links
-const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+let row = table.insertRow();
+row.insertCell().textContent = "Дата";
+row.insertCell().textContent = "Тип";
+row.insertCell().textContent = "Категория";
+row.insertCell().textContent = "Сумма";
+row.insertCell().textContent = "Описание";
 
-navLinks.forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
+for (let i = 0; i < testArray.length; i++) {
 
-    // Remove active class from all links
-    navLinks.forEach(item => {
-      item.classList.remove('active');
-    });
+  let row = table.insertRow();
 
-    // Add active class to clicked link and its mobile/desktop counterpart
-    const linkText = link.textContent;
-    navLinks.forEach(item => {
-      if (item.textContent === linkText) {
-        item.classList.add('active');
-      }
-    });
+  row.insertCell().textContent = testArray[i].type;
+  row.insertCell().textContent = testArray[i].sum;
+  row.insertCell().textContent = testArray[i].category;
+  row.insertCell().textContent = testArray[i].date;
+  row.insertCell().textContent = testArray[i].description;
+}
 
-    // Close mobile menu if open
-    mobileMenu.classList.remove('show');
-    mobileMenuToggle.parentElement.classList.remove('mobile-menu-open');
-  });
-});
-
-// Prevent actual form submission
-document.querySelectorAll('button').forEach(button => {
-  button.addEventListener('click', (e) => {
-    e.preventDefault();
-  });
-});
-
-// Notification CTA
-document.querySelector('.notification-cta').addEventListener('click', (e) => {
-  e.preventDefault();
-});
+document.body.append(table);

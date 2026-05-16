@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,12 +7,8 @@
   <link rel="stylesheet" href="src/card.css">
   <link rel="stylesheet" href="src/header.css">
   <link rel="stylesheet" href="/src/style.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -24,20 +21,19 @@
       </a>
       <nav>
         <ul class="desktop-nav">
-          <li><a href="#" class="nav-link active">Solutions</a></li>
-          <li><a href="#" class="nav-link">Industries</a></li>
-          <li><a href="#" class="nav-link">Resources</a></li>
-          <li><a href="#" class="nav-link">Company</a></li>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Добавить доход/расход
+          </button>
         </ul>
       </nav>
     </div>
     <div class="mobile-menu" id="mobile-menu">
-      <a href="#" class="mobile-nav-link active">Solutions</a>
-      <a href="#" class="mobile-nav-link">Industries</a>
-      <a href="#" class="mobile-nav-link">Resources</a>
-      <a href="#" class="mobile-nav-link">Company</a>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Добавить
+      </button>
     </div>
   </header>
+
 
   <div class="card-container">
     <div class="card-price">
@@ -48,7 +44,8 @@
         <li>Feature two</li>
         <li>Email support</li>
       </ul>
-      <a href="#" class="card-price__btn income_color">Choose plan</a>
+      <a href="#" class="card-price__btn income_color">За текущий месяц</a>
+      <a href="#" class="card-price__btn income_color">За всё время</a>
     </div>
 
     <div class="card-price">
@@ -77,11 +74,60 @@
     </div>
   </div>
 
-  <script src="src/main.js"></script>
-  <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="select" class="form-label">Тип транзакции</label>
+            <select id="select" class="form-select">
+              <option>Доход</option>
+              <option>Расход</option>
+            </select>
+            <label for="exampleFormControlInput1" class="form-label" required>Сумма</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" />
+            <label for="select" class="form-label">Категория</label>
+            <select id="select" class="form-select">
+              <option>Еда</option>
+              <option>Транспорт</option>
+              <option>Развлечения</option>
+              <option>Учёба</option>
+              <option>Другое</option>
+            </select>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Комментарий</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+      </div>
+    </div>
+    </section>
+
+    <script src="src/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
 </body>
+
 </html>

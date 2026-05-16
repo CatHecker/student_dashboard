@@ -1,0 +1,64 @@
+.card-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 85px;
+}
+
+.card-price {
+  width: 380px;
+  padding: 36px;
+  background: #fff;
+  border-radius: 18px;
+  text-align: center;
+
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(140deg, #00c2ff, #7a5cff, #ff3d77) border-box;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+  transition: .35s;
+  overflow: hidden;
+}
+
+.card-price:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, .18);
+}
+
+.card-price__value {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 0 0 20px;
+  color: #2563eb;
+}
+
+.card-price__btn-container {
+  display: flex;
+}
+
+.card-price__btn {
+  margin-top: 5px;
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 30px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.balance_color {
+  background: linear-gradient(135deg, #7a5cff, #00c2ff);
+}
+
+.income_color {
+  background: linear-gradient(135deg, #f6fa05, #18d544);
+}
+
+.expenses_color {
+  background: linear-gradient(135deg, #ee661e, #dc1284);
+}
+
+@media (max-width: 1194px) {
+  .card-price {
+    width: 300px;
+  }
+}

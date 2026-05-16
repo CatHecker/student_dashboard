@@ -3,7 +3,7 @@ let lastScrollTop = 0;
 const header = document.getElementById("site-header");
 const scrollThreshold = 50;
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll", (e) => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
   // Add box shadow when scrolled
@@ -26,6 +26,37 @@ window.addEventListener("scroll", () => {
 });
 
 // Mobile menu toggle
+let testArray = [
+  {
+    type: "income",
+    sum: 500,
+    category: "food",
+    date: "01.10.26",
+    description: "Description",
+  },
+  {
+    type: "income",
+    sum: 500,
+    category: "food",
+    date: "01.10.26",
+    description: "Description",
+  },
+  {
+    type: "income",
+    sum: 500,
+    category: "food",
+    date: "01.10.26",
+    description: "Description",
+  },
+  {
+    type: "income",
+    sum: 500,
+    category: "food",
+    date: "01.10.26",
+    description: "Description",
+  },
+];
+
 const mobileMenu = document.getElementById("mobile-menu");
 
 // Add active class to nav links
@@ -103,3 +134,25 @@ function handleFormSubmit(event) {
   event.preventDefault();
   serializeForm(applicantForm);
 }
+
+let table = document.createElement("table");
+table.classList = "table table-striped";
+
+let row = table.insertRow();
+row.insertCell().textContent = "Дата";
+row.insertCell().textContent = "Тип";
+row.insertCell().textContent = "Категория";
+row.insertCell().textContent = "Сумма";
+row.insertCell().textContent = "Описание";
+
+for (let i = 0; i < testArray.length; i++) {
+  let row = table.insertRow();
+
+  row.insertCell().textContent = testArray[i].type;
+  row.insertCell().textContent = testArray[i].sum;
+  row.insertCell().textContent = testArray[i].category;
+  row.insertCell().textContent = testArray[i].date;
+  row.insertCell().textContent = testArray[i].description;
+}
+
+document.body.append(table);

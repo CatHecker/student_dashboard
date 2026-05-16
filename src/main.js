@@ -1,30 +1,3 @@
-// Sticky header behavior
-let lastScrollTop = 0;
-const header = document.getElementById("site-header");
-const scrollThreshold = 50;
-
-window.addEventListener("scroll", (e) => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-  // Add box shadow when scrolled
-  if (scrollTop > 10) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
-
-  // Hide header when scrolling down, show when scrolling up
-  if (scrollTop > scrollThreshold) {
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-      header.classList.add("header-hidden");
-    } else {
-      header.classList.remove("header-hidden");
-    }
-  }
-
-  lastScrollTop = scrollTop;
-});
-
 // Mobile menu toggle
 let testArray = [
   {
@@ -94,25 +67,10 @@ document.querySelectorAll("button").forEach((button) => {
 
 document.getElementById("saveChangeBtn").addEventListener("click", (e) => {
   handleFormSubmit(e);
-  //   let user = {
-  //   name: 'John',
-  //   surname: 'Smith'
-  // };
-  // let response = await fetch('/article/fetch/post/user', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json;charset=utf-8'
-  //   },
-  //   body: JSON.stringify(user)
-  // });
-  // let result = await response.json();
-  // alert(result.message);
-  //   fetch("localhost:8080");
-  //
 });
 const applicantForm = document.getElementById("mars-once");
 function serializeForm(formNode) {
-  let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+  let transactions = JSON.parse(localStorage.getItem("transactions"));
   let result = Array.from(formNode).map((element) => {
     const { name, value } = element;
     return { name, value };
@@ -122,13 +80,8 @@ function serializeForm(formNode) {
     "transactions",
     JSON.stringify([...transactions, result]),
   );
+  startFetch();
 }
-
-let startFetch = () => {
-  let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-  return transactions;
-};
-console.log(startFetch());
 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -138,21 +91,82 @@ function handleFormSubmit(event) {
 let table = document.createElement("table");
 table.classList = "table table-striped";
 
+let startFetch = () => {
+  let arr = JSON.parse(localStorage.getItem("transactions"));
+  let transactions = arr.map((el) => {
+    let ht = {};
+    el.map(({ name, value }) => {
+      ht[name] = value;
+    });
+    return ht;
+  });
+  for (let i = 0; i < transactions.length; i++) {
+    let row = table.insertRow();
+    console.log(transactions);
+    row.insertCell().textContent = transactions[i].type;
+    row.insertCell().textContent = transactions[i].sum;
+    row.insertCell().textContent = transactions[i].category;
+    row.insertCell().textContent = transactions[i].date;
+    row.insertCell().textContent = transactions[i].description;
+  }
+  return transactions;
+};
 let row = table.insertRow();
-row.insertCell().textContent = "Дата";
 row.insertCell().textContent = "Тип";
-row.insertCell().textContent = "Категория";
 row.insertCell().textContent = "Сумма";
+
+row.insertCell().textContent = "Категория";
+row.insertCell().textContent = "Дата";
+
 row.insertCell().textContent = "Описание";
-
-for (let i = 0; i < testArray.length; i++) {
-  let row = table.insertRow();
-
-  row.insertCell().textContent = testArray[i].type;
-  row.insertCell().textContent = testArray[i].sum;
-  row.insertCell().textContent = testArray[i].category;
-  row.insertCell().textContent = testArray[i].date;
-  row.insertCell().textContent = testArray[i].description;
-}
+startFetch();
 
 document.body.append(table);
+
+let getPlus = () => {
+  let s = 0;
+  let arr = JSON.parse(localStorage.getItem("transactions"));
+  let transactions = arr.map((el) => {
+    let flag = true;
+    el.map(({ name, value }) => {
+      if (name === "type" && value === "Расход") flag = false;
+      if (name === "sum" && flag) s += Number(value);
+    });
+  });
+  document.getElementById("plus").innerText = s + "₽";
+};
+getPlus();
+
+let getMinus = () => {
+  let s = 0;
+  let arr = JSON.parse(localStorage.getItem("transactions"));
+  let transactions = arr.map((el) => {
+    let flag = true;
+    el.map(({ name, value }) => {
+      if (name === "type" && value === "Расход") flag = false;
+      if (name === "sum" && !flag) s += Number(value);
+    });
+  });
+  document.getElementById("minus").innerText = s + "₽";
+};
+getMinus();
+
+let getEqual = () => {
+  let s = 0;
+  let arr = JSON.parse(localStorage.getItem("transactions"));
+  let transactions = arr.map((el) => {
+    let flag = true;
+    el.map(({ name, value }) => {
+      if (name === "type" && value === "Расход") flag = false;
+      if (name === "sum") {
+        if (flag) {
+          s += Number(value);
+        } else {
+          s -= Number(value);
+        }
+      }
+    });
+  });
+  document.getElementById("equal").innerText = s + "₽";
+};
+getEqual();

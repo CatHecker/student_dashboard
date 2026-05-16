@@ -38,31 +38,31 @@
       <nav>
         <ul class="desktop-nav">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Добавить доход/расход
+            Добавить 
           </button>
         </ul>
         <a href="#" class="card-price__btn income_color">За текущий месяц</a>
         <a href="#" class="card-price__btn income_color">За всё время</a>
       </div>
-
+      </header> 
   <!--Карточка с доходами-->
   <div class="card-container">
 
     <div class="card-price income_color" id="income-card">
       <h3>Доходы</h3>
-      <p class="card-price__value" style="color: rgb(11, 237, 11)">₽0</p>
+      <p class="card-price__value" id="plus" style="color: rgb(11, 237, 11)">₽0</p>
     </div>
 
     <!--Карточка с балансом-->
     <div class="card-price balance_color" id="balance-card">
       <h3>Баланс</h3>
-      <p class="card-price__value" style="color: blue">₽0</p>
+      <p class="card-price__value" id="equal" style="color: blue">₽0</p>
     </div>
 
     <!--Карточка с расходами-->
     <div class="card-price expenses_color" id="expenses-card">
       <h3>Расходы</h3>
-      <p class="card-price__value" style="color: red">₽0</p>
+      <p class="card-price__value" id="minus" style="color: red">₽0</p>
     </div>
 
   <!-- Модальное окно -->
@@ -74,16 +74,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <form id="mars-once" action="/apply/" method="POST">
           <div class="mb-3">
             <label for="select" class="form-label">Тип транзакции</label>
-            <select id="select" class="form-select">
+            <select name="type" id="select" class="form-select">
               <option>Доход</option>
               <option>Расход</option>
             </select>
             <label for="exampleFormControlInput1" class="form-label" required>Сумма</label>
-            <input type="number" class="form-control" id="exampleFormControlInput1" />
+            <label for="birthDate">Дата</label>
+            <input type="date", name="birthDate"/>
+            <input name="sum" type="number" class="form-control" id="exampleFormControlInput1" />
             <label for="select" class="form-label">Категория</label>
-            <select id="select" class="form-select">
+            <select name="category" id="select" class="form-select">
               <option>Еда</option>
               <option>Транспорт</option>
               <option>Развлечения</option>
@@ -92,9 +95,9 @@
             </select>
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label">Комментарий</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-          </form>
+          </form >
           <div class="modal-footer">
             <button
               type="button"
